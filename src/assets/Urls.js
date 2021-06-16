@@ -1,6 +1,3 @@
-
-
-
  export const url = 'https://capap.gugik.gov.pl/api/fts/hier/pkt/qq';
  export const urlWoj = 'https://capap.gugik.gov.pl/api/fts/hier/fdict/pkt/woj?cnt=50&o=0&dt=false';
  export const urlPow = 'https://capap.gugik.gov.pl/api/fts/hier/fdict/pkt/pow?cnt=50&o=0&dt=false';

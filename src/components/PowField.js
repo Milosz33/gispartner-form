@@ -37,7 +37,6 @@ export const PowField = (props) => {
 
             setOptions(options);
         }
-
         if (woj !== "") {
             fetchPow();
         }
@@ -45,7 +44,6 @@ export const PowField = (props) => {
 
     const handleChange = (event) => {
         const value = event.target.value;
-
         setFieldValue(props.name, value);
     };
 

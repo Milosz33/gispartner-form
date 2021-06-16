@@ -3,12 +3,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import "../scss/RegisterForm.scss";
 import { WojField } from "./WojField";
 import { PowField } from "./PowField";
+import { GminaField } from "./GminaField";
+import { CityField } from "./CityField";
+import { PostCodeField } from "./PostCodeField";
+import { NumField } from "./NumField";
 
 const RegisterForm = () => {
     return (
         <div className="form-container">
             <Formik
-                initialValues={{ name: "", lastname: "", email: "", woj: "", pow: "" }}
+                initialValues={{ name: "", lastname: "", email: "", woj: "", pow: "", gmina:"", city:"", postCode:"", num:"" }}
                 validate={(values) => {
                     const errors = {};
                     if (!values.email) {
@@ -33,6 +37,18 @@ const RegisterForm = () => {
                     }
                     if (values.pow === "") {
                         errors.pow = "wybierz powiat";
+                    }
+                    if (values.gmina === "") {
+                        errors.gmina = "wybierz gminę";
+                    }
+                    if (values.city === "") {
+                        errors.city = "wybierz miejscowość";
+                    }
+                    if (values.postCode === "") {
+                        errors.postCode = "wybierz kod pocztowy";
+                    }
+                    if (values.num === "") {
+                        errors.num = "wybierz numer";
                     }
 
                     return errors;
@@ -84,8 +100,21 @@ const RegisterForm = () => {
                             />
                             <h4>wybierz województwo</h4>
                             <WojField name="woj" />
+
                             <h4>wybierz powiat</h4>
                             <PowField name="pow" />
+
+                            <h4>wybierz gminę</h4>
+                            <GminaField name="gmina" />
+
+                            <h4>wybierz miejscowość</h4>
+                            <CityField name="city" />
+
+                            <h4>wybierz kod pocztowy</h4>
+                            <PostCodeField name="postCode" />
+
+                            <h4>wybierz numer</h4>
+                            <NumField name="num" />
                             <div>
                                 <button
                                     className="form-btn"
