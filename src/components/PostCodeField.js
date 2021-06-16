@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useFormikContext, useField } from "formik";
+import { useFormikContext } from "formik";
 import { urlPostCode } from "../assets/Urls";
 
 export const PostCodeField = (props) => {
     const {
-        values: { woj },
+        values: { woj, pow, gmi, msc, ulc },
         setFieldValue,
     } = useFormikContext();
-    const [, meta] = useField(props);
+
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
@@ -24,18 +24,22 @@ export const PostCodeField = (props) => {
                     },
                     {
                         level: "pow",
-                        q: "",
+                        v: pow,
                     },
                     {
-                        level: "gmina",
-                        q: "",
+                        level: "gmi",
+                        v: gmi,
                     },
                     {
-                        level: "city",
-                        q: "",
+                        level: "msc",
+                        v: msc,
                     },
                     {
-                        level: "postCode",
+                        level: "ulc",
+                        v: ulc,
+                    },
+                    {
+                        level: "kod",
                         q: "",
                     },
                 ]),
@@ -49,10 +53,10 @@ export const PostCodeField = (props) => {
             setOptions(options);
         }
 
-        if (woj !== "") {
+        if (woj !== "" && pow !== "" && gmi !== "" && msc !== "") {
             fetchPostCode();
         }
-    }, [woj, props.name, setFieldValue]);
+    }, [woj, pow, gmi, msc, ulc, props.name, setFieldValue]);
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -69,9 +73,7 @@ export const PostCodeField = (props) => {
                     </option>
                 ))}
             </select>
-            {!!meta.touched && !!meta.error && (
-                <div style={{ color: "red" }}>{meta.error}</div>
-            )}
+
         </>
     );
 };

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useFormikContext, useField } from "formik";
+import { useFormikContext } from "formik";
 import { urlWoj } from "../assets/Urls";
+
 
 export const WojField = (props) => {
     const { setFieldValue } = useFormikContext();
-    const [, meta] = useField(props);
+
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
@@ -49,9 +50,7 @@ export const WojField = (props) => {
                     </option>
                 ))}
             </select>
-            {!!meta.touched && !!meta.error && (
-                <div style={{ color: "red" }}>{meta.error}</div>
-            )}
+
         </>
     );
 };

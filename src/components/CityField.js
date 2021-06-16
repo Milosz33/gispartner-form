@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useFormikContext, useField } from "formik";
-import {urlCity, urlPow} from "../assets/Urls";
+import { useFormikContext } from "formik";
+import { urlCity } from "../assets/Urls";
 
 export const CityField = (props) => {
     const {
-        values: { woj },
+        values: { woj, pow, gmi },
         setFieldValue,
     } = useFormikContext();
-    const [, meta] = useField(props);
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
@@ -24,14 +23,14 @@ export const CityField = (props) => {
                     },
                     {
                         level: "pow",
-                        q: "",
+                        v: pow,
                     },
                     {
-                        level: "gmina",
-                        q: "",
+                        level: "gmi",
+                        v: gmi,
                     },
                     {
-                        level: "city",
+                        level: "msc",
                         q: "",
                     },
                 ]),
@@ -45,10 +44,10 @@ export const CityField = (props) => {
             setOptions(options);
         }
 
-        if (woj !== "") {
+        if (woj !== "" && pow !== "" && gmi !== "") {
             fetchCity();
         }
-    }, [woj, props.name, setFieldValue]);
+    }, [woj, pow, gmi, props.name, setFieldValue]);
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -65,9 +64,7 @@ export const CityField = (props) => {
                     </option>
                 ))}
             </select>
-            {!!meta.touched && !!meta.error && (
-                <div style={{ color: "red" }}>{meta.error}</div>
-            )}
+
         </>
     );
 };

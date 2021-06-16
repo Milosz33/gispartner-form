@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useFormikContext, useField } from "formik";
+import { useFormikContext } from "formik";
 import { urlNum } from "../assets/Urls";
 
 export const NumField = (props) => {
     const {
-        values: { woj },
+        values: { woj, pow, gmi, msc, ulc, kod},
         setFieldValue,
     } = useFormikContext();
-    const [, meta] = useField(props);
+
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
@@ -24,22 +24,26 @@ export const NumField = (props) => {
                     },
                     {
                         level: "pow",
-                        q: "",
+                        v: pow,
                     },
                     {
-                        level: "gmina",
-                        q: "",
+                        level: "gmi",
+                        v: gmi,
                     },
                     {
-                        level: "city",
-                        q: "",
+                        level: "msc",
+                        v: msc,
                     },
                     {
-                        level: "postCode",
-                        q: "",
+                        level: "ulc",
+                        v: ulc,
                     },
                     {
-                        level: "num",
+                        level: "kod",
+                        v: kod,
+                    },
+                    {
+                        level: "nr",
                         q: "",
                     },
                 ]),
@@ -53,10 +57,10 @@ export const NumField = (props) => {
             setOptions(options);
         }
 
-        if (woj !== "") {
+        if (woj !== "" && pow !== "" && gmi !== "" && msc !== "" && ulc !== "" && kod !== "") {
             fetchNum();
         }
-    }, [woj, props.name, setFieldValue]);
+    }, [woj, pow, gmi, msc, ulc, kod, props.name, setFieldValue]);
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -73,9 +77,7 @@ export const NumField = (props) => {
                     </option>
                 ))}
             </select>
-            {!!meta.touched && !!meta.error && (
-                <div style={{ color: "red" }}>{meta.error}</div>
-            )}
+
         </>
     );
 };

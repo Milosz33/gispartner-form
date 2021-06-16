@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useFormikContext } from "formik";
-import { urlGmina } from "../assets/Urls";
+import { urlStreet } from "../assets/Urls";
 
-export const GminaField = (props) => {
+export const StreetField = (props) => {
     const {
-        values: { woj, pow },
+        values: { woj, pow, gmi, msc },
         setFieldValue,
     } = useFormikContext();
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
-        async function fetchGmina() {
-            console.log("Request: fetchGmina");
+        async function fetchStreet() {
+            console.log("Request: fetchStreet");
 
-            const response = await fetch(urlGmina, {
+            const response = await fetch(urlStreet, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify([
@@ -27,7 +27,15 @@ export const GminaField = (props) => {
                     },
                     {
                         level: "gmi",
-                        q: "",
+                        v: gmi,
+                    },
+                    {
+                        level: "msc",
+                        v: msc,
+                    },
+                    {
+                        level: "ulc",
+                        q: "ulc",
                     },
                 ]),
             });
@@ -35,12 +43,15 @@ export const GminaField = (props) => {
             const options = data.map((item) => ({
                 value: item.value,
                 label: item.value,
-            }));      setOptions(options);
+            }));
+
+            setOptions(options);
         }
-        if (woj !== "" && pow !== "") {
-            fetchGmina();
+
+        if (woj !== "" && pow !== "" && gmi !== "" && msc !== "") {
+            fetchStreet();
         }
-    }, [woj, pow, props.name, setFieldValue]);
+    }, [woj, pow, gmi, msc, props.name, setFieldValue]);
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -50,13 +61,14 @@ export const GminaField = (props) => {
     return (
         <>
             <select name={props.name} onChange={handleChange}>
-                <option value="">wybierz gminę</option>
+                <option value="">wybierz ulicę</option>
                 {options.map((item, index) => (
                     <option key={index} value={item.value}>
                         {item.label}
                     </option>
                 ))}
             </select>
+
         </>
     );
 };
