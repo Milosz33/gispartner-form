@@ -3,7 +3,6 @@
   display: flex;
   background-color: greenyellow;
   width: 100%;
-  height: 70vh;
   justify-content: space-between;
   margin-left-left: 100px;
   margin-top: 50px;
@@ -11,6 +10,12 @@
 
   h4, h2{
     margin-left: 50px;
+  }
+
+  #select-region{
+    margin-left: 50px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
   }
 
   .error-message{

@@ -1,11 +1,31 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import "../scss/RegisterForm.scss";
-
+import {urlWoj} from "../assets/Urls";
 
 
 
 const RegisterForm = () => {
+    const [woj, setWoj] = useState([]);
+
+       const HandleDataSelect = async () => {
+           const response = await fetch(urlWoj, {
+               method: 'POST',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify([
+                   {
+                       level: 'woj',
+                       q: ''
+                   }])
+           })
+           const data = await response.json();
+           setWoj(data);
+
+       };
+           useEffect(() => {
+               HandleDataSelect();
+           }, []);
+
     return(
         <div className="form-container">
             <Formik
@@ -48,10 +68,14 @@ const RegisterForm = () => {
                             <h4>Nazwisko</h4>
                             <Field className="lastname" placeholder="Twoje nazwisko" type="text" name="lastname"/>
                             <ErrorMessage className="error-message" name="lastname" component="div" />
-                            <h4> wprowadź swój e-mail</h4>
+                            <h4>wprowadź swój e-mail</h4>
                             <Field className="email" placeholder="e-mail" type="email" name="email"/>
                             <ErrorMessage className="error-message" name="email" component="div" />
 
+                            <h4>wybierz województwo</h4>
+                            <select onChange={HandleDataSelect}  id="select-region">
+                                <option value={}>województwo</option>
+                            </select>
                             <div>
                                 <button className="form-btn" type="submit" disabled={isSubmitting}>
                                     Wyślij
@@ -62,6 +86,6 @@ const RegisterForm = () => {
                 )}
             </Formik>
         </div>
-    )}
+    )};
 
 export default RegisterForm;

@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import RegisterForm from "./components/RegisterForm";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         <Switch>
           <Route exact path={"/"}component={RegisterForm}/>
           {/*<Route path={"/list"}component={""}/>*/}
-          {/*  <Route component={NotFound} />*/}
+            <Route component={NotFound} />
         </Switch>
       </Router>
   );
