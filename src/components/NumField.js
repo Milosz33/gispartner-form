@@ -4,7 +4,7 @@ import { urlNum } from "../assets/Urls";
 
 export const NumField = (props) => {
     const {
-        values: { woj, pow, gmi, msc, ulc, kod},
+        values: { woj, pow, gmi, msc, ulc, kod },
         setFieldValue,
     } = useFormikContext();
 
@@ -77,7 +77,6 @@ export const NumField = (props) => {
                     </option>
                 ))}
             </select>
-
         </>
     );
 };

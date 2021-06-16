@@ -35,7 +35,7 @@ export const StreetField = (props) => {
                     },
                     {
                         level: "ulc",
-                        q: "ulc",
+                        q: "",
                     },
                 ]),
             });
@@ -68,7 +68,6 @@ export const StreetField = (props) => {
                     </option>
                 ))}
             </select>
-
         </>
     );
 };

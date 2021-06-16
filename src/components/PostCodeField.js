@@ -52,8 +52,8 @@ export const PostCodeField = (props) => {
 
             setOptions(options);
         }
-
-        if (woj !== "" && pow !== "" && gmi !== "" && msc !== "") {
+        if (
+            woj !== "" && pow !== "" && gmi !== "" && msc !== "" && ulc !== "") {
             fetchPostCode();
         }
     }, [woj, pow, gmi, msc, ulc, props.name, setFieldValue]);
@@ -73,7 +73,6 @@ export const PostCodeField = (props) => {
                     </option>
                 ))}
             </select>
-
         </>
     );
 };

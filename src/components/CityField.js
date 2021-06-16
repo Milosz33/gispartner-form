@@ -4,7 +4,7 @@ import { urlCity } from "../assets/Urls";
 
 export const CityField = (props) => {
     const {
-        values: { woj, pow, gmi },
+        values: { woj, pow, gmina },
         setFieldValue,
     } = useFormikContext();
     const [options, setOptions] = useState([]);
@@ -27,7 +27,7 @@ export const CityField = (props) => {
                     },
                     {
                         level: "gmi",
-                        v: gmi,
+                        v: gmina,
                     },
                     {
                         level: "msc",
@@ -44,10 +44,10 @@ export const CityField = (props) => {
             setOptions(options);
         }
 
-        if (woj !== "" && pow !== "" && gmi !== "") {
+        if (woj !== "" && pow !== "" && gmina !== "") {
             fetchCity();
         }
-    }, [woj, pow, gmi, props.name, setFieldValue]);
+    }, [woj, pow, gmina, props.name, setFieldValue]);
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -64,7 +64,6 @@ export const CityField = (props) => {
                     </option>
                 ))}
             </select>
-
         </>
     );
 };

@@ -2,20 +2,14 @@
 .form-container {
   display: flex;
   background-color: greenyellow;
-  width: 100%;
-  justify-content: space-between;
+  width: 50%;
   margin-left-left: 100px;
   margin-top: 50px;
   color: #4f5052;
 
+
   h4, h2{
     margin-left: 50px;
-  }
-
-  #select-region{
-    margin-left: 50px;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
   }
 
   .error-message{
@@ -34,7 +28,7 @@
     background-color: whitesmoke;
     margin-left: 80px;
     margin-top: 10px;
-    padding: 10px;
+
     width: 170px;
     font-size: 1.2rem;
   }

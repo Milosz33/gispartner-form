@@ -1,20 +1,23 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import "../scss/RegisterForm.scss";
-import "../scss/select.scss";
-import { WojField } from "./WojField";
-import { PowField } from "./PowField";
-import { GminaField } from "./GminaField";
-import { CityField } from "./CityField";
-import { PostCodeField } from "./PostCodeField";
-import { NumField } from "./NumField";
-import {StreetField} from "./StreetField";
+import "./RegisterForm.scss";
+import "../../scss/select.scss";
+import { WojField } from "../../components/WojField";
+import { PowField } from "../../components/PowField";
+import { GminaField } from "../../components/GminaField";
+import { CityField } from "../../components/CityField";
+import { PostCodeField } from "../../components/PostCodeField";
+import { NumField } from "../../components/NumField";
+import { StreetField } from "../../components/StreetField";
+
+
+
 
 const RegisterForm = () => {
     return (
         <div className="form-container">
             <Formik
-                initialValues={{ name: "", lastname: "", email: "", woj: "", pow: "", gmina: "", city: "", street: "",  postCode: "", num: "" }}
+                initialValues={{ name: "", lastname: "", email: "", woj: "", pow: "", gmi: "", msc: "", ulc: "",  kod: "", nr: "" }}
                 validate={(values) => {
                     const errors = {};
                     if (!values.email) {
@@ -40,25 +43,42 @@ const RegisterForm = () => {
                     if (values.pow === "") {
                         errors.pow = "wybierz powiat";
                     }
-                    if (values.gmina === "") {
-                        errors.gmina = "wybierz gminę";
+                    if (values.gmi === "") {
+                        errors.gmi = "wybierz gminę";
                     }
-                    if (values.city === "") {
-                        errors.city = "wybierz miejscowość";
+                    if (values.msc === "") {
+                        errors.msc = "wybierz miejscowość";
                     }
-                    if (values.street === "") {
-                        errors.street = "wybierz ulicę";
+                    if (values.ulc === "") {
+                        errors.ulc = "wybierz ulicę";
                     }
-                    if (values.postCode === "") {
-                        errors.postCode = "wybierz kod pocztowy";
+                    if (values.kod === "") {
+                        errors.kod = "wybierz kod pocztowy";
                     }
-                    if (values.num === "") {
-                        errors.num = "wybierz numer";
+                    if (values.nr === "") {
+                        errors.nr = "wybierz numer";
                     }
 
                     return errors;
                 }}
                 onSubmit={(values, { resetForm, setSubmitting }) => {
+                    let oldUsers = window.localStorage.getItem("users");
+                    oldUsers = oldUsers ? JSON.parse(oldUsers) : [];
+                    window.localStorage.setItem("users", JSON.stringify([...oldUsers,
+                            {
+                                name: values.name,
+                                lastname: values.lastname,
+                                email: values.email,
+                                woj: values.woj,
+                                pow: values.pow,
+                                gmi: values.gmi,
+                                msc: values.msc,
+                                ulc: values.ulc,
+                                kod: values.kod,
+                                nr: values.nr,
+                            },
+                        ])
+                    );
                     setSubmitting(false);
                     resetForm();
                 }}
@@ -79,6 +99,7 @@ const RegisterForm = () => {
                                 name="name"
                                 component="div"
                             />
+
                             <h4>Nazwisko</h4>
                             <Field
                                 className="lastname"
@@ -91,6 +112,7 @@ const RegisterForm = () => {
                                 name="lastname"
                                 component="div"
                             />
+
                             <h4>wprowadź swój e-mail</h4>
                             <Field
                                 className="email"
@@ -103,15 +125,16 @@ const RegisterForm = () => {
                                 name="email"
                                 component="div"
                             />
-                            <h4>wybierz województwo</h4>
-                            <WojField name="woj" />
+
+                            <h4>województwo</h4>
+                            <WojField name="woj"/>
                             <ErrorMessage
                                 className="error-message"
                                 name="woj"
                                 component="div"
                             />
 
-                            <h4>wybierz powiat</h4>
+                            <h4>powiat</h4>
                             <PowField name="pow" />
                             <ErrorMessage
                                 className="error-message"
@@ -119,53 +142,46 @@ const RegisterForm = () => {
                                 component="div"
                             />
 
-                            <h4>wybierz gminę</h4>
-                            <GminaField name="gmina" />
+                            <h4>gmina</h4>
+                            <GminaField name="gmi" />
                             <ErrorMessage
                                 className="error-message"
-                                name="gmina"
+                                name="gmi"
                                 component="div"
                             />
 
-                            <h4>wybierz miejscowość</h4>
-                            <CityField name="city" /><ErrorMessage
+                            <h4>miejscowość</h4>
+                            <CityField name="msc" /><ErrorMessage
                             className="error-message"
-                            name="city"
+                            name="msc"
                             component="div"
                         />
 
-                            <h4>wybierz ulicę</h4>
-                            <StreetField name="street" />
+                            <h4>ulica</h4>
+                            <StreetField name="ulc" />
                             <ErrorMessage
                                 className="error-message"
-                                name="street"
+                                name="ulc"
                                 component="div"
                             />
 
-                            <h4>wybierz kod pocztowy</h4>
-                            <PostCodeField name="postCode" />
+                            <h4>kod pocztowy</h4>
+                            <PostCodeField name="kod" />
                             <ErrorMessage
                                 className="error-message"
-                                name="postCode"
+                                name="kod"
                                 component="div"
                             />
 
-                            <h4>wybierz numer</h4>
-                            <NumField name="num" />
+                            <h4>numer</h4>
+                            <NumField name="nr" />
                             <ErrorMessage
                                 className="error-message"
-                                name="num"
+                                name="nr"
                                 component="div"
                             />
-
                             <div>
-                                <button
-                                    className="form-btn"
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                >
-                                    Wyślij
-                                </button>
+                                 <button className="form-btn" type="submit" disabled={isSubmitting}>Wyślij</button>
                             </div>
                         </Form>
                     </>
