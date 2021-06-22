@@ -10,7 +10,7 @@ export const UsersList = (props) => {
 
         setUsers(users);
     }, []);
-    window.localStorage.removeItem("users")
+    // window.localStorage.removeItem("users")
 
     return (
         <div className="users-box">

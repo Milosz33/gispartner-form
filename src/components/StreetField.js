@@ -3,8 +3,7 @@ import { useFormikContext } from "formik";
 import { urlStreet } from "../assets/Urls";
 
 export const StreetField = (props) => {
-    const {
-        values: { woj, pow, gmi, msc },
+    const { values: { woj, pow, gmi, msc },
         setFieldValue,
     } = useFormikContext();
     const [options, setOptions] = useState([]);
