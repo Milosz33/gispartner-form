@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./RegisterForm.scss";
 import "../../scss/select.scss";
@@ -27,7 +27,7 @@ async function fetchPoint(user) {
     body: JSON.stringify(body),
   }).then((r) => r.json());
 
-  return response.single?.map((record) => record.geometry.coordinates) || [];
+  return response?.[0].single?.record.geometry.coordinates || [];
 }
 
 const RegisterForm = (props) => {

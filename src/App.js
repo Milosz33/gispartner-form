@@ -10,7 +10,8 @@ import { Map } from "./components/Map";
 function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    setUsers(window.localStorage.getItem("users") || []);
+    const fetchedUsers = window.localStorage.getItem("users");
+    setUsers(fetchedUsers ? JSON.parse(fetchedUsers) : []);
   }, []);
 
   return (
